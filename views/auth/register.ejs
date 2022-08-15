@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %> 
+
+<body>
+
+    <h3>Hello there!</h1>
+    <div class="main">
+    <form action="/auth/register" method="post">
+
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required="true" placeholder="Username"><br><br>
+        
+        <label for="email">Email ID</label>
+        <input type="email" name="email" id="email" required="true" placeholder="Email"> <br><br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required="true" placeholder="Password"><br><br>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required="true" placeholder="Confirm Password"><br><br>
+
+        <label for="token">Token</label>
+        <input type="token" name="token" id="token" required="false" placeholder="Token"><br><br>
+        <button class="button" type="submit">Register</button>
+        <p>Already have an account? <a href="/auth/login">Login here!</a></p>
+        <p>A confirmation mail will be sent to you after you register!</a></p>
+    </form>   
+</div> 
+
+
+<%- include('../partials/footer.ejs') %> 
+
