@@ -8,8 +8,10 @@ const express = require('express'),
 
 router.post('/register', validation, auth_register_post)
 router.get('/register', auth_register_get)
+
 router.get('/login', forwardAuthenticated, auth_login_get)
 router.post('/login', auth_login_post)
+
 router.get('/logout', (req, res) => {
     req.logout()
     res.redirect('/auth/login')
