@@ -14,6 +14,6 @@ export function ensureAuthenticated(req, res, next) {
 
 export function ensureAdminAuthenticated(req, res, next) {
   if(!req.isAuthenticated()) res.redirect('/auth/login')
-  if(!req.user.admin) res.send("Unauthorized")
+  if(!req.user.admin) res.redirect('/404')
   else return next()
 }
