@@ -1,3 +1,3 @@
-export const landing = (req, res)=>{
+module.exports = landing = (req, res)=>{
     res.render("landing", {title: "Home"})
 }

@@ -1,7 +1,7 @@
-import express from 'express'
-const router = express.Router()
-import {landing} from '../controllers/landing.js'
+const express = require('express'),
+    router = express.Router(),
+    landing  = require('../controllers/landing.js');
 
 router.get('/', landing)
 
-export {router};
+module.exports = router;

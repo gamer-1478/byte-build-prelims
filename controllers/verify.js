@@ -1,6 +1,6 @@
-import User from '../models/userSchema.js'
+const User = require('../models/userSchema.js');
 
-export async function verify_email(req, res){
+module.exports = async function verify_email(req, res){
     const user = await User.findOne({emailToken: req.params.token})
     if(!user) req.flash('error', 'Invalid token, please try registering again!')
     user.confirmed = true;

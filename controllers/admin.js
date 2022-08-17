@@ -1,7 +1,6 @@
-import User from '../models/userSchema.js'
-import {nanoid} from 'nanoid'
+const User = require('../models/userSchema.js'),
+    { nanoid } = require('nanoid');
 
-export const admin = async (req, res)=>{
-    res.render("admin/admin", {title: "admin", user:req.user})
+module.exports = admin = async (req, res) => {
+    res.render("admin/admin", { title: "admin", user: req.user })
 }
-

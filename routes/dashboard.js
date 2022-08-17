@@ -1,8 +1,8 @@
-import express from 'express'
-const router = express.Router()
-import {dashboard} from '../controllers/dashboard.js'
-import {ensureAuthenticated} from '../middlewares/authenticate.js'
+const express = require('express'),
+    router = express.Router(),
+    { dashboard } = require('../controllers/dashboard.js'),
+    { ensureAuthenticated } = require('../middlewares/authenticate.js');
 
 router.get('/', ensureAuthenticated, dashboard)
 
-export {router};
+module.exports = { router };

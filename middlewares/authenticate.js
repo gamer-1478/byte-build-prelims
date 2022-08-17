@@ -1,19 +1,21 @@
-export function ensureAuthenticated(req, res, next) {
+function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     }
     else res.redirect('/auth/login');
   }
 
-  export function forwardAuthenticated(req, res, next) {
+function forwardAuthenticated(req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
     }
     else res.redirect('/dashboard');      
   }
 
-export function ensureAdminAuthenticated(req, res, next) {
+function ensureAdminAuthenticated(req, res, next) {
   if(!req.isAuthenticated()) res.redirect('/auth/login')
   if(!req.user.admin) res.redirect('/404')
   else return next()
 }
+
+module.exports = { ensureAuthenticated, forwardAuthenticated, ensureAdminAuthenticated };

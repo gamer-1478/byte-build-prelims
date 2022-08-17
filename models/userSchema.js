@@ -1,17 +1,17 @@
-import mongoose from 'mongoose';
-const reqString = { type:String, required:true }
-const reqBoolean = {type: Boolean, required:true, default:false}
-import moment from 'moment'
-let now = new Date()
-let dateStringWithTime = moment(now).format('YYYY-MM-DD HH:MM:SS');
+const mongoose = require('mongoose'),
+    reqString = { type: String, required: true },
+    reqBoolean = { type: Boolean, required: true, default: false },
+    moment = require('moment'),
+    now = new Date(),
+    dateStringWithTime = moment(now).format('YYYY-MM-DD HH:MM:SS');
 
 
 const userSchema = new mongoose.Schema({
-    email:reqString, 
-    username:reqString,
-    password:reqString,
+    email: reqString,
+    username: reqString,
+    password: reqString,
     date: {
-        type:String,
+        type: String,
         default: dateStringWithTime
     },
     userId: reqString,
@@ -21,4 +21,4 @@ const userSchema = new mongoose.Schema({
     emailToken: reqString,
 })
 
-export default mongoose.model("User", userSchema)
+module.exports = mongoose.model("User", userSchema)
