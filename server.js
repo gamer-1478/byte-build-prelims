@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-//module s
+//modules 
 const express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
@@ -16,6 +16,7 @@ const express = require('express'),
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
     admin = require('./routes/admin.js');
+    map = require('./routes/map.js');
 
 const app = express(),
     PORT = 5000 || process.env.PORT;
@@ -52,6 +53,7 @@ app.get('/test', (req, res) => {
 app.use('/', landing)
 app.use('/auth', auth)
 app.use('/admin', admin)
+app.use('/map', map)
 
 
 app.listen(PORT, () => {
