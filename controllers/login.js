@@ -7,18 +7,18 @@ const auth_login_get = (req, res) => {
 
 const auth_login_post = (req, res, next) => {
     User.findOne({ email: req.body.email }).then(user => {
-        if (!user) res.send("Account does not exists")
-        else {
-            if (user.confirmed) {
-                passport.authenticate('local', {
-                    successRedirect: '/dashboard',
-                    failureRedirect: '/auth/login',
-                    failureFlash: true
-                })(req, res, next);
-            } else {
-                res.send({ success: false, message: 'Email not confirmed!' });
-            }
+        if (!user) {
+            return res.send("Account does not exists")
+        } if (!user.confirmed) {
+            return res.send({ success: false, message: 'Email not confirmed!' });
         }
+
+        passport.authenticate('local', {
+            successRedirect: '/dashboard',
+            failureRedirect: '/auth/login',
+            failureFlash: true
+        })(req, res, next);
+
     })
 }
 

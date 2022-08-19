@@ -10,6 +10,7 @@ const express = require('express'),
     passport = require('passport'),
     passportInit = require('./utils/passportConfig.js'),
     flash = require('express-flash'),
+    expressLayouts = require('express-ejs-layouts'),
     mongoose = require('mongoose');
 
 //routes
@@ -22,7 +23,10 @@ const app = express(),
 
 //app middleware
 app.set('view engine', 'ejs')
-app.use(express.static('public'), express.json({ limit: '1mb' }), express.urlencoded({ extended: true, limit: '1mb' }), flash())
+app.use(express.static('public'))
+app.use(express.json({ limit: '1mb' }), express.urlencoded({ extended: true, limit: '1mb' }))
+app.use(flash())
+app.use(expressLayouts)
 app.use('/', express.static('public'))
 
 //passport middleware
@@ -44,10 +48,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //main
-app.get('/test', (req, res) => {
-    req.flash('success', 'test')
-    res.send(req.flash())
-})
 app.use('/', landing)
 app.use('/auth', auth)
 app.use('/admin', admin)
