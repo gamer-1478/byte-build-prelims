@@ -20,7 +20,7 @@ const landing = require('./routes/landing.js'),
     map = require('./routes/map.js');
 
 const app = express(),
-    PORT = 5000 || process.env.PORT;
+    PORT = process.env.PORT || 5000;
 
 //app middleware
 app.set('view engine', 'ejs')
