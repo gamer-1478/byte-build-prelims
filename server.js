@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-//modules 
+//modules
 const express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
@@ -20,7 +20,6 @@ const landing = require('./routes/landing.js'),
 
 const app = express(),
     PORT = 5000 || process.env.PORT;
-
 
 //app middleware
 app.set('view engine', 'ejs')

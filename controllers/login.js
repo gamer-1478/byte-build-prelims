@@ -16,7 +16,7 @@ const auth_login_post = (req, res, next) => {
                     failureFlash: true
                 })(req, res, next);
             } else {
-                res.send('Email not confirmed!');
+                res.send({ success: false, message: 'Email not confirmed!' });
             }
         }
     })
