@@ -16,7 +16,7 @@ const express = require('express'),
 //routes
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
-    admin = require('./routes/admin.js');
+    admin = require('./routes/admin.js'),
     map = require('./routes/map.js');
 
 const app = express(),
