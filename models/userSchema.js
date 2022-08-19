@@ -16,9 +16,6 @@ const userSchema = new mongoose.Schema({
     },
     userId: reqString,
     admin: reqBoolean,
-    ip: reqString,
-    confirmed: reqBoolean,
-    emailToken: reqString,
 })
 
 module.exports = mongoose.model("User", userSchema)
