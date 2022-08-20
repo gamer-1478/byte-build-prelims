@@ -18,6 +18,7 @@ const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
     admin = require('./routes/admin.js'),
     map = require('./routes/map.js');
+    store = require('./routes/store.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;
@@ -53,6 +54,7 @@ app.use('/', landing)
 app.use('/auth', auth)
 app.use('/admin', admin)
 app.use('/map', map)
+app.use('/store', store)
 
 
 app.listen(PORT, () => {
