@@ -9,7 +9,7 @@ function forwardAuthenticated(req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
     }
-    else res.redirect('/dashboard');      
+    else res.redirect('/');
   }
 
 function ensureAdminAuthenticated(req, res, next) {

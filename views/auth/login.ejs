@@ -1,18 +1,107 @@
-
-<body>
-    <h3>Welcome back!</h3>
-
-    <div class="main">
-        <form action="/auth/login" method="post">
-            <label for="email">Email ID</label>
-            <input type="email" name="email" id="email" required="true"> <br> <br>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required="true"> <br> <br>
-            <button class="button" type="submit">Login</button>
-            <p>New here? Go <a href="/auth/register">Register!</a></p>
-        </form>   
-    </div> 
+<div>
+    <div class="landing-class">
+        <div class="signup">
+            <h1>Login</h1>
+            <div class="signup-form">
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Ashok.Kumar@gmail.com">
+                </div>
+                <div class="field">
+                    <label for="pass">Password</label>
+                    <input type="text" id="pass" name="pass" placeholder="@$#0kKum@r1234@secure">
+                </div>
+                <p class="click-here">Don't have an account? <a href="/auth/register">Register here!</a></p>
+                <input type="button" value="proceed" onclick="submit();" class="signup-button" />
+            </div>
+        </div>
+    </div>
 </div>
-    
 
+<style>
+    .click-here {
+        color: #393E47;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: 130px;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
+
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
+</style>
+
+<script>
+    var notyf = new Notyf();
+    async function submit() {
+        var email = document.getElementById("email").value;
+        var pass = document.getElementById("pass").value;
+        await fetch("/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: pass
+            })
+        }).then(async (response) => {
+            res = await response.json()
+            console.log(res[0].sucess == true, res[0])
+            if (res[0].sucess == true) {
+                await notyf.success(
+                'You have been successfully Logged In, redirecting Automatically!');
+                setTimeout(function () {
+                    window.location.href = "/"
+                }, 1000);
+            } else {
+                await notyf.error(res[0].msg)
+            }
+        });
+    }
+</script>

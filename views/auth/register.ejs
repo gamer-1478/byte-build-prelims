@@ -102,16 +102,19 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: fullname,
+                name: fullname,
                 email: email,
-                password: pass
+                password: pass,
+                confirmPassword: confpass
             })
         }).then(async (response) => {
             res = await response.json()
             console.log(res)
             if (res.success) {
-                await notyf.success('You have been successfully registered!');
-                window.location.href = "/"
+                await notyf.success('You have been successfully registered, redirecting Automatically!');
+                setTimeout(function() {
+                    window.location.href = "/"
+                }, 1000);
             } else {
                 await notyf.error(res[0].msg)
             }

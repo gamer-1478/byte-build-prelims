@@ -8,27 +8,27 @@ const auth_register_get = (req, res) => {
 
 const auth_register_post = async (req, res) => {
   let errors = [];
-  const { username, email, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
-  if (!username || !email || !password) {
+  if (!name || !email || !password) {
     errors.push({ msg: "All fields are required" })
   };
   if (password !== confirmPassword) {
     errors.push({ msg: "Passwords do not match" });
   }
   if (errors.length > 0) {
-    res.render("register", { errors, title: "Register", description: "Register" })
-  }else{
+    res.send(errors);
+  } else {
 
-  User.findOne({ email: email }).then((user) => {
-    if (user) {
-      errors.push({ msg: "User already exists, try logging in instead." })
-      res.render("auth/register", { errors, title: "Register", description: "Register" })
-    }else{
+    User.findOne({ email: email }).then((user) => {
+      if (user) {
+        errors.push({ msg: "User already exists, try logging in instead." })
+        return res.send(errors)
+      }
       console.log("test")
       const userId = nanoid();
       const newUser = new User({
-        username: username,
+        name: name,
         email: email,
         password: password,
         userId: userId,
@@ -38,13 +38,16 @@ const auth_register_post = async (req, res) => {
           if (err) throw err;
           newUser.password = hash;
           newUser.save().then((user) => {
-            // console.log(user)
-            res.redirect("/auth/login")
+            console.log(user)
+            user = JSON.parse(JSON.stringify(user));
+            user.success = true;
+            res.send(user)
           }).catch((err) => console.log(err));
         })
       );
-    }});
-}};
+    });
+  }
+};
 
 
 
