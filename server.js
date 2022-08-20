@@ -55,7 +55,12 @@ app.use('/auth', auth)
 app.use('/admin', admin)
 app.use('/map', map)
 app.use('/store', store)
-
+app.get('/404', (req, res) => {
+    res.render('404')
+});
+app.get('*', (req, res) => {
+    res.redirect('/404')
+});
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
