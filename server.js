@@ -42,7 +42,7 @@ passportInit(passport)
 
 //connect mongodb
 const dbUri = process.env.MONGO_URI
-mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log("Connected to mongodb"))
 
 //more passport
 app.use(passport.initialize())
