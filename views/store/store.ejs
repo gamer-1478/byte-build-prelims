@@ -1,0 +1,13 @@
+<div class="store">
+    <h1>Chandni Chowk Pokemon Bazar</h1>
+    <% products.forEach(product=>{%>
+        <div>
+            <h3> <a href="/store/view/<%=product.productId%>" > <%= product.name %> </a> </h3>
+            <p> <%= product.price %> Creds </p>
+            <p> <%= product.quantity %>  </p>
+            <p> <%= product.type %>  </p>
+            <p> <%= product.description %>  </p>
+        </div>
+    <% }) %> 
+
+</div>

@@ -1,0 +1,14 @@
+<div>
+    <h1> <%= product.name %>  </h1>
+    <h3> <%= product.price %> Creds </h3>
+    <h3> <%= product.quantity %>  </h3>
+    <h3> <%= product.type %>  </h3>
+    <p> <%= product.description %>  </p>
+
+    <form action="/store/buy/<%=product.productId%>" method="post">
+        <label for="qty">Quantity</label>
+        <input type="number" minimum="1" maximum="<%=product.quantity%>" name="qty" id="qty">
+        <button type="submit">Buy Now</button>
+    </form>
+
+</div>
