@@ -1,31 +1,120 @@
-<%- include('../partials/header.ejs') %> 
+<div>
+    <div class="landing-class">
+        <div class="signup">
+            <h1>Sign Up</h1>
+            <div class="signup-form">
+                <div class="field">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Ashok Kumar">
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Ashok.Kumar@gmail.com">
+                </div>
+                <div class="field">
+                    <label for="pass">Password</label>
+                    <input type="text" id="pass" name="pass" placeholder="@$#0kKum@r1234@secure">
+                </div>
+                <div class="field">
+                    <label for="confpass">Confirm Password</label>
+                    <input type="text" id="confpass" name="confpass" placeholder="@$#0kKum@r1234@secure">
+                </div>
+                <p class="click-here">Already have an account? <a href="/auth/login">Login here!</a></p>
+                <input type="button" value="proceed" onclick="submit();" class="signup-button" />
+            </div>
+        </div>
+    </div>
+</div>
 
-<body>
+<style>
+    .click-here {
+        color: #393E47;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 
-    <h3>Hello there!</h1>
-    <div class="main">
-    <form action="/auth/register" method="post">
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: 130px;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required="true" placeholder="Username"><br><br>
-        
-        <label for="email">Email ID</label>
-        <input type="email" name="email" id="email" required="true" placeholder="Email"> <br><br>
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required="true" placeholder="Password"><br><br>
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
 
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" required="true" placeholder="Confirm Password"><br><br>
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        <label for="token">Token</label>
-        <input type="token" name="token" id="token" required="false" placeholder="Token"><br><br>
-        <button class="button" type="submit">Register</button>
-        <p>Already have an account? <a href="/auth/login">Login here!</a></p>
-        <p>A confirmation mail will be sent to you after you register!</a></p>
-    </form>   
-</div> 
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
 
-<%- include('../partials/footer.ejs') %> 
+</style>
 
+<script>
+    var notyf = new Notyf();
+    async function submit() {
+        var fullname = document.getElementById("fullname").value;
+        var email = document.getElementById("email").value;
+        var pass = document.getElementById("pass").value;
+        var confpass = document.getElementById("confpass").value;
+        if (pass != confpass) {
+            notyf.error("Passwords do not match");
+            return;
+        }
+        await fetch("/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: fullname,
+                email: email,
+                password: pass
+            })
+        }).then(async (response) => {
+            res = await response.json()
+            console.log(res)
+            if (res.success) {
+                await notyf.success('You have been successfully registered!');
+                window.location.href = "/"
+            } else {
+                await notyf.error(res[0].msg)
+            }
+        });
+    }
+</script>

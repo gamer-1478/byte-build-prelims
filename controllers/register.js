@@ -1,4 +1,4 @@
-const User = require("../models/userSchema.js"),
+const User = require("../schemas/userSchema.js"),
   bcrypt = require("bcrypt"),
   { nanoid } = require("nanoid"),
   crypto = require("crypto"),

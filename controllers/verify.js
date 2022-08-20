@@ -1,4 +1,4 @@
-const User = require('../models/userSchema.js');
+const User = require('../schemas/userSchema.js');
 
 module.exports = async function verify_email(req, res){
     const user = await User.findOne({emailToken: req.params.token})

@@ -1,4 +1,4 @@
-const User = require('../models/userSchema.js'),
+const User = require('../schemas/userSchema.js'),
     passport = require('passport');
 
 const auth_login_get = (req, res) => {

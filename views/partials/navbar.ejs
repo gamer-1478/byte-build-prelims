@@ -5,22 +5,25 @@
                 src="https://cdn.discordapp.com/attachments/1005877818586038424/1006809868218408960/Logo.png"></a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="/shop/men" class="nav-link">Map</a>
+                <a href="/map" class="nav-link">Map</a>
             </li>
             <li class="nav-item">
-                <a href="/shop/women" class="nav-link">Gym</a>
+                <a href="/gym" class="nav-link">Gym</a>
             </li>
             <li class="nav-item">
-                <a href="/shop/kids" class="nav-link">Feed</a>
+                <a href="/feed" class="nav-link">Feed</a>
             </li>
             <li class="nav-item">
-                <a href="/shop/sports" class="nav-link">Registered Pokemons</a>
+                <a href="/pokedex" class="nav-link">Registered Pokemons</a>
             </li>
             <li class="nav-item">
-                <a href="/shop/new" class="nav-link">Store</a>
+                <a href="/shop" class="nav-link">Store</a>
             </li>
             <li class="nav-item sign-button-mobile">
-                <a href="/auth/signup" class="nav-link">Sign Up</a>
+                <a href="/auth/register" class="nav-link">Sign Up</a>
+            </li>
+            <li class="nav-item sign-button-mobile">
+                <a href="/auth/login" class="nav-link">LogIn</a>
             </li>
         </ul>
         <div class="right-side-nav">
@@ -38,7 +41,7 @@
                     src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
                     alt="profile"></a>
             <% } else { %>
-            <button class="sign-button" onclick="new function(){window.location.href = '/register'};">Sign up</button>
+            <button class="sign-button" onclick="new function(){window.location.href = '/auth/register'};">Sign up</button>
             <% } %>
         </div>
         <div class="hamburger">
@@ -88,6 +91,7 @@
         text-decoration: none;
         font-weight: 500;
         font-size: 14px;
+        color: #fff;
     }
 
     .nav-branding {
@@ -176,6 +180,7 @@
         .hamburger {
             display: block;
         }
+
         .sign-button-mobile {
             display: block;
         }
