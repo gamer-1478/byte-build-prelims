@@ -2,7 +2,6 @@ const express = require('express'),
     router = express.Router(),
     { auth_register_post, auth_register_get } = require('../controllers/register.js'),
     { auth_login_get, auth_login_post } = require('../controllers/login.js'),
-    verify_email = require('../controllers/verify.js'),
     validation  = require('../middlewares/validation.js'),
     { ensureAuthenticated, forwardAuthenticated } = require('../middlewares/authenticate.js');
 

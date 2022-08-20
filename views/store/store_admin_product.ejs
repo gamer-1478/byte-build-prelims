@@ -1,9 +1,12 @@
 <div>
-    <form action="/store/admin/edit/<%=product.id%> " method="post">
+    <form action="/store/admin/edit/<%=product.productId%> " method="post">
         <label for="Name">Name</label>
         <input type="text" name="name" id="name" required="true" placeholder="Name" value="<%=product.name%>"><br><br>
         <label for="quantity">Quantity</label>
         <input type="number" name="quantity" id="quantity" required="true" placeholder="Quantity" value="<%=product.quantity%>"><br><br>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" required="true" placeholder="Price"><br><br>
+        <br><br>
         <label for="type">Type</label>
         <select id="type" name="type" value="<%=product.type%>">
             <option value="potions">Potions</option>
@@ -19,7 +22,7 @@
         <button type="submit">Save Item</button>
     </form>
 <br><br>
-<form action="/store/admin/delete/<%=product.id%>" method="post">
+<form action="/store/admin/delete/<%=product.productId%>" method="post">
     <button type="submit">DELETE ITEM</button>
 </form>
 </div>

@@ -6,6 +6,9 @@
         <input type="text" name="name" id="name" required="true" placeholder="Name"><br><br>
         <label for="quantity">Quantity</label>
         <input type="number" name="quantity" id="quantity" required="true" placeholder="Quantity"><br><br>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" required="true" placeholder="Price"><br><br>
+        <br><br>
         <label for="type">Type</label>
         <select id="type" name="type">
             <option value="potions">Potions</option>
@@ -23,7 +26,8 @@
 
     <% products.forEach(product=>{%>
         <div>
-            <h3> <a href="/store/admin/create/<%=product.id%>" > <%= product.name %> </a> </h3>
+            <h3> <a href="/store/admin/create/<%=product.productId%>" > <%= product.name %> </a> </h3>
+            <p> <%= product.price %> Creds </p>
             <p> <%= product.quantity %>  </p>
             <p> <%= product.type %>  </p>
             <p> <%= product.description %>  </p>
