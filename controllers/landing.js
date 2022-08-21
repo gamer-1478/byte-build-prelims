@@ -1,3 +1,3 @@
 module.exports = landing = (req, res)=>{
-    res.render("landing", {title: "Home"})
+    res.render("landing", {title: "Home", user: req.user})
 }

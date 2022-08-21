@@ -1,37 +1,280 @@
 <div class="store">
-    <h1>Chandni Chowk Pokemon Bazar</h1>
-    <h2>Create New Product</h2>
-    <form action="/store/admin/create" method="post">
-        <label for="Name">Name</label>
-        <input type="text" name="name" id="name" required="true" placeholder="Name"><br><br>
-        <label for="quantity">Quantity</label>
-        <input type="number" name="quantity" id="quantity" required="true" placeholder="Quantity"><br><br>
-        <label for="price">Price</label>
-        <input type="number" name="price" id="price" required="true" placeholder="Price"><br><br>
-        <br><br>
-        <label for="type">Type</label>
-        <select id="type" name="type">
-            <option value="potions">Potions</option>
-            <option value="pokeballs">Pokeballs</option>
-            <option value="lootbox">Lootbox</option>
-            <option value="other">Other</option>
-          </select>
-          <br><br>
-          <label for="description">Description</label>
-          <br><br>
-          <textarea name="description" id="description" cols="30" rows="10"></textarea>
-          <br><br>
-        <button type="submit">Create Item</button>
-    </form>
-
-    <% products.forEach(product=>{%>
-        <div>
-            <h3> <a href="/store/admin/create/<%=product.productId%>" > <%= product.name %> </a> </h3>
-            <p> <%= product.price %> Creds </p>
-            <p> <%= product.quantity %>  </p>
-            <p> <%= product.type %>  </p>
-            <p> <%= product.description %>  </p>
+    <h1>Store Admin Controls</h1>
+    <div class="signup-form">
+        <h2>Sell New Product</h2>
+        <div class="field">
+            <label for="Name">Name</label>
+            <input type="text" name="name" id="name" required="true" placeholder="Name">
         </div>
-    <% }) %> 
+        <div class="field">
+            <label for="quantity">Quantity</label>
+            <input type="number" name="quantity" id="quantity" required="true" placeholder="Quantity">
+        </div>
+        <div class="field">
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price" required="true" placeholder="Price">
+        </div>
+        <div class="field">
+            <label for="image">Image</label>
+            <input type="text" name="image" id="image" required="true" placeholder="Image">
+        </div>
 
+        <div class="field">
+            <label for="type">Type</label>
+            <select id="type" name="type">
+                <option value="potions">Potions</option>
+                <option value="pokeballs">Pokeballs</option>
+                <option value="lootbox">Lootbox</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        </div>
+
+        <button onclick="submit()" class="signup-button">Create Item</button>
+    </div>
+
+    <h1 class="edit-title">Edit Items From Below</h1>
+    <% products.forEach(productlist=>{%>
+    <div class="productlist">
+        <%productlist.forEach(product=>{%>
+        <div class="list-item" onclick='change("<%=product.productId%>")'>
+            <div class="item-image">
+                <img height="200px" width='200px' src="<%=product.image%>">
+            </div>
+            <div class="item-details">
+                <h1 class="item-title"><%= product.name %> </h1>
+                <div class="same-line">
+                    <p class="price"> <span class="bold"> ₹<%= product.price %></span> </p>
+                    <p> <span class="bold">Stock Left:</span> <%= product.quantity %> </p>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    <% }) %>
 </div>
+
+<style>
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: 130px;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
+
+    textarea {
+        width: 300px;
+        height: 100px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
+
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
+</style>
+
+<style>
+    .edit-title {
+        margin-top: 80px;
+    }
+
+    .landing-title {
+        font-size: 3.2vw;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+    }
+
+    .store {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 120vh;
+    }
+
+    .store-landing {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 80%;
+        height: 30vh;
+        background-color: #212121;
+        border-radius: 20px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .same-line {
+        margin-top: 10px;
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .productlist {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .list-item {
+        width: 300px;
+        min-height: 300px;
+        background-color: #eee;
+        margin: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Jost', sans-serif;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .item-image {
+        margin-top: 10px;
+        border-radius: 10px;
+        background-color: white;
+        height: 220px;
+        width: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .item-title {
+        margin-top: 20px;
+        font-size: 1.9em;
+        font-weight: 600;
+        color: #000;
+        font-family: 'Jost', sans-serif;
+
+    }
+
+    .item-details {
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: 'Jost', sans-serif;
+        margin-bottom: 30px;
+    }
+
+    @media screen and (max-width: 765px) {
+        .productlist {
+            flex-direction: column;
+        }
+
+        .store-landing {
+            width: 75%;
+            height: 10vh;
+        }
+
+        .landing-title {
+            font-size: 4.5vw;
+        }
+    }
+</style>
+
+<script>
+    function change(productId) {
+        window.location.href = "/store/admin/create/" + productId;
+    }
+</script>
+
+<script>
+    var notyf = new Notyf();
+    async function submit() {
+        var name = document.getElementById("name").value;
+        var quantity = document.getElementById("quantity").value;
+        var price = document.getElementById("price").value;
+        var type = document.getElementById("type").value;
+        var description = document.getElementById("description").value;
+        var image = document.getElementById("image").value;
+        console.log(name, quantity, price, type, description, image);
+        await fetch("/store/admin/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                quantity: quantity,
+                price: price,
+                type: type,
+                description: description,
+                image: image
+            })
+        }).then(async (response) => {
+            res = await response.json()
+            console.log(res.sucess == true, res)
+            if (res.sucess == true) {
+                await notyf.success(res.msg);
+                setTimeout(function () {
+                    window.location.href = "/store/view/" + res.productId;
+                }, 1000);
+            } else {
+                await notyf.error(res[0].msg)
+            }
+        });
+    }
+</script>

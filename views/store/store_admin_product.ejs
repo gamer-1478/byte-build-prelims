@@ -5,7 +5,8 @@
         <label for="quantity">Quantity</label>
         <input type="number" name="quantity" id="quantity" required="true" placeholder="Quantity" value="<%=product.quantity%>"><br><br>
         <label for="price">Price</label>
-        <input type="number" name="price" id="price" required="true" placeholder="Price"><br><br>
+        <input type="number" name="price" id="price" required="true" placeholder="Price"
+            value="<%=product.price%>"><br><br>
         <br><br>
         <label for="type">Type</label>
         <select id="type" name="type" value="<%=product.type%>">
@@ -17,7 +18,7 @@
           <br><br>
           <label for="description">Description</label>
           <br><br>
-          <textarea name="description" id="description" cols="30" rows="10" value="<%=product.description%>"></textarea>
+          <textarea name="description" id="description" cols="30" rows="10"><%=product.description%></textarea>
           <br><br>
         <button type="submit">Save Item</button>
     </form>

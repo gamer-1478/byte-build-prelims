@@ -8,10 +8,10 @@ router.get('/', store)
 router.get('/view/:id', store_item_view)
 router.post('/buy/:id', store_item_buy)
 //store admin routes
-router.get('/admin', store_admin)
-router.post('/admin/create', store_admin_create)
-router.get('/admin/create/:id', store_admin_get_product)
-router.post('/admin/edit/:id', store_admin_post_product)
-router.post('/admin/delete/:id', store_admin_delete_product)
+router.get('/admin', ensureAdminAuthenticated, store_admin)
+router.post('/admin/create', ensureAdminAuthenticated, store_admin_create)
+router.get('/admin/create/:id', ensureAdminAuthenticated, store_admin_get_product)
+router.post('/admin/edit/:id', ensureAdminAuthenticated,  store_admin_post_product)
+router.post('/admin/delete/:id', ensureAdminAuthenticated, store_admin_delete_product)
 
 module.exports = router;

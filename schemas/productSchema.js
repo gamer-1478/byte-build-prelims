@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
     reqString = { type: String, required: true },
+    notreqString = { type: String, required: false },
     reqNum = {type: Number, required: true}
 
 const productSchema = new mongoose.Schema({
@@ -8,6 +9,7 @@ const productSchema = new mongoose.Schema({
     quantity: reqNum,
     description: reqString,
     productId: reqString,
+    image: notreqString,
     price: reqNum,
 })
 
