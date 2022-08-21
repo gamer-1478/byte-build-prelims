@@ -17,7 +17,7 @@ const express = require('express'),
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
     admin = require('./routes/admin.js'),
-    map = require('./routes/map.js'),
+    map = require('./routes/map.js'), cart = require('./routes/cart.js'),
     store = require('./routes/store.js');
 
 const app = express(),
@@ -55,6 +55,8 @@ app.use('/auth', auth)
 app.use('/admin', admin)
 app.use('/map', map)
 app.use('/store', store)
+app.use('/cart', cart)
+
 app.get('/404', (req, res) => {
     res.render('404')
 });
