@@ -23,6 +23,8 @@ const landing = require('./routes/landing.js'),
     checkout = require('./routes/checkout.js');
     orders = require('./routes/orders.js');
     pokemon = require('./routes/pokemon.js');
+    dashboard = require('./routes/dashboard.js');
+    pokedex = require('./routes/pokedex.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;
@@ -64,6 +66,8 @@ app.use('/cart', cart)
 app.use('/checkout', checkout)
 app.use('/orders', orders)
 app.use('/pokemon', pokemon)
+app.use('/dashboard', dashboard)
+app.use('/pokedex', pokedex)
 
 app.get('/404', (req, res) => {
     res.render('404')
