@@ -2,9 +2,9 @@ const { ensureAuthenticated } = require('../middlewares/authenticate')
 
 const express = require('express'),
     router = express.Router(),
-    User = require("../schemas/userSchema")
+    User = require("../schemas/userSchema"),
     Pokemon = require('../schemas/pokemonSchema'),
-    {nanoid} = require('nanoid')
+    {nanoid} = require('nanoid');
 
 router.get('/', ensureAuthenticated, async (req, res)=> {
     const userId = req.user.userId
