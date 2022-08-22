@@ -7,8 +7,8 @@ const express = require('express'),
     {nanoid} = require('nanoid');
 
 router.get('/', ensureAuthenticated, async (req, res)=> {
-    const userId = req.user.userId
-    const pokemons = await Pokemon.find({userId})
+    const userId = req.user.userId;
+    const pokemons = await Pokemon.find({userId});
     res.render('pokemon', {pokemons:await NewtestArray(pokemons), user: req.user})
 })
 
