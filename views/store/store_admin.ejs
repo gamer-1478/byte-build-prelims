@@ -250,7 +250,6 @@
         var type = document.getElementById("type").value;
         var description = document.getElementById("description").value;
         var image = document.getElementById("image").value;
-        console.log(name, quantity, price, type, description, image);
         await fetch("/store/admin/create", {
             method: "POST",
             headers: {
@@ -266,7 +265,6 @@
             })
         }).then(async (response) => {
             res = await response.json()
-            console.log(res.sucess == true, res)
             if (res.sucess == true) {
                 await notyf.success(res.msg);
                 setTimeout(function () {

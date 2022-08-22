@@ -136,7 +136,6 @@
             })
         }).then(async (response) => {
             res = await response.json()
-            console.log(res.success == true, res)
             if (res.success == true) {
                 await notyf.success(res.msg);
             } else {

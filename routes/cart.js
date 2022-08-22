@@ -39,7 +39,6 @@ router.post('/quantity/:id', ensureAuthenticated, (req, res)=> {
     var cart = req.user.cart;
     var index = cart.findIndex(product => product.prodid === id);
     cart[index].quan = req.body.quantity;
-    console.log(req.body.quantity, cart[index].quan)
     req.user.cart = cart;
     req.user.save();
     res.send({ success: true });

@@ -12,17 +12,45 @@
   </style>
 </div>
 <script>
-  
-    var map = new MapmyIndia.Map("map", {
-    center: [28.61, 77.23],
+  var map = new MapmyIndia.Map("map", {
+    center: [28.5245, 77.1855],
     zoomControl: true,
     hybrid: true,
     search: true,
     location: true,
   });
+  map.setZoom(10);
 
-  <%-gyms%>.forEach(gym => {
-    console.log(gym.location.split(','))
-    var marker = L.marker(gym.split(',')).addTo(map).openPopup()
+  var create_content = function (tittle, content, id) {
+    return `<div>
+    <div class=\"header\">
+      <span style="font-weight:bold;">
+        Type:
+      </span>
+      <span>
+        ${tittle}
+      </span>
+    </div>
+    <div class=\"info_css\">
+      <span style="font-weight:bold;">
+        Name:
+      </span>
+      ${content}
+    </div>
+    <div>
+      <a href="/gym/${id}" target="_blank">Know More!</a>
+    </div>
+  </div>`;
+  };
+
+  <%- JSON.stringify(gyms) %>.forEach(gym => {
+    if (gym.type_gym == 'Stadium') {
+      var content = create_content(gym.type_gym, gym.name, 'stadium');
+      L.marker(gym.location.split(',')).addTo(map).bindPopup(content)
+    } else {
+      var content = create_content(gym.type_gym, gym.name, gym._id);
+      L.marker(gym.location.split(',')).addTo(map).bindPopup(content)
+    }
   });
+  //add onclick;
 </script>

@@ -1,3 +1,69 @@
-<div>
+<div class="gym-container">
     <h1>Gyms</h1>
+    <% gyms.forEach(gymlist=>{ %>
+    <div class="gyms-list">
+        <% gymlist.forEach(gym => { %>
+        <div class="gym-card" onclick="openGym('<%= gym._id %>')">
+            <h2><%= gym.name %></h2>
+            <h4><%= gym.type_gym %></h4>
+            <p><%= gym.location %></p>
+        </div>
+        <% }) %>
+    </div>
+    <% }) %>
+
 </div>
+
+<style>
+    .gym-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .gyms-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+
+    .gym-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 50%;
+        height: 100px;
+        border-radius: 10px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin: 10px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        .gyms-list {
+            flex-direction: column;
+        }
+        .gym-card {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    function openGym(id) {
+        if (id == '63035f25cfcdb9845d5d81c7'){
+            window.location.href = '/gym/stadium';
+        }
+        else {
+            window.location.href = '/gym/' + id;
+        }
+    }
+</script>

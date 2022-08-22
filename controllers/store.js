@@ -14,7 +14,6 @@ const store = async (req, res) => {
 //each item view
 const store_item_view = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
-    console.log(product.name)
     res.render("store/store_item", { user: req.user, product })
 }
 
@@ -27,12 +26,10 @@ const store_item_buy = async (req, res) => {
             for (var i = 0; i < user.cart.length; i++) {
                 if (user.cart[i].prodid === product.productId) {
                     user.cart[i].quan = parseInt(user.cart[i].quan)+parseInt(req.body.qty);
-                    console.log(req.body.qty, user.cart[i].quan)
                     user.save()
                     return res.send({ success: true, msg: "Product added to cart" })
                 }
                 if (i === user.cart.length - 1 && user.cart[i].productId !== product.productId) {
-                    console.log("here")
                     user.cart.push({ prodid: product.productId, quan: req.body.qty });
                     await user.save()
                     return res.send({ success: true, msg: "Product added to cart" })
