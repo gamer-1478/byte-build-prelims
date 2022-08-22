@@ -11,10 +11,14 @@ const gym_admin = (req, res) => {
 }
 
 const gym_admin_post = async (req, res)=> {
-    const {name, location} = req.body
+    const {name, location, website, email, gymLeader, image} = req.body
     const newGym = new Gym({
         name,
-        location
+        location, 
+        website,
+        email,
+        gymLeader,
+        image
     })
 
     newGym.save().then((gym)=> {

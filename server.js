@@ -20,6 +20,9 @@ const landing = require('./routes/landing.js'),
     map = require('./routes/map.js'), cart = require('./routes/cart.js'),
     store = require('./routes/store.js');
     gym = require('./routes/gyms.js');
+    checkout = require('./routes/checkout.js');
+    orders = require('./routes/orders.js');
+    pokemon = require('./routes/pokemon.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;
@@ -58,6 +61,9 @@ app.use('/map', map)
 app.use('/store', store)
 app.use('/gym', gym)
 app.use('/cart', cart)
+app.use('/checkout', checkout)
+app.use('/orders', orders)
+app.use('/pokemon', pokemon)
 
 app.get('/404', (req, res) => {
     res.render('404')

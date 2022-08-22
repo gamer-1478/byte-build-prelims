@@ -1,0 +1,17 @@
+<div>
+
+    <form action="/pokemon/add" method="post">
+        
+    </form>
+
+    <h2>Your Pokemons</h2>
+    <% pokemons.foreach((pokemon)=>{ %>
+        <h3><%=pokemon.name %> </h3>
+        <p><%=pokemon.type %> </p>
+        <p><%=pokemon.hp%></p>
+        <p><%=pokemon.weight %> </p>
+    <% }) %> 
+
+
+    <form action="/pokemon/register" method="post"></form>
+</div>

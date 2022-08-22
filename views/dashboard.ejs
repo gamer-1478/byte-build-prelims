@@ -2,8 +2,10 @@
 <%- include('./partials/navbar.ejs') %>
 
     <div class="heading">
-        <h1>DASHBOARD</h1>
-        <h2> <%= user.username %>  </h1>
+        <h1>Dashboard</h1>
+        <h2> Welcome <%= user.username %>! </h2>
+        <a href="/pokemon">Register a Pokemon</a>
+        <a href="/orders">Previous Orders</a>
     </div>
     
 <%- include('./partials/footer.ejs'); %>
