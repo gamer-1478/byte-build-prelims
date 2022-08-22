@@ -24,8 +24,7 @@ const landing = require('./routes/landing.js'),
     checkout = require('./routes/checkout.js'),
     orders = require('./routes/orders.js'),
     dashboard = require('./routes/dashboard.js'),
-    pokemon = require('./routes/pokemon.js');
-    dashboard = require('./routes/dashboard.js');
+    pokemon = require('./routes/pokemon.js'),
     pokedex = require('./routes/pokedex.js');
 
 const app = express(),
