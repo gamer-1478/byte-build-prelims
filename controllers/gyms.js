@@ -11,7 +11,6 @@ const gym_admin = async(req, res) => {
 }
 
 const gym_admin_post = async (req, res)=> {
-<<<<<<< HEAD
     const {name, location, website, email, gymLeader, image} = req.body
     const newGym = new Gym({
         name,
@@ -20,13 +19,6 @@ const gym_admin_post = async (req, res)=> {
         email,
         gymLeader,
         image
-=======
-    const { name, location, type_gym } = req.body
-    const newGym = new Gym({
-        name,
-        location,
-        type_gym
->>>>>>> bf4c51df158ca01c2517053ccd3cb771180f4575
     })
 
     newGym.save().then((gym)=> {
