@@ -1,8 +1,15 @@
+<div class="dashboard-container">
+    <h1>Dashboard</h1>
+    <h2>Welcome <%= user.name %>! </h2>
+    <a href="/pokemon">Register a Pokemon</a>
+    <a href="/orders">Previous Orders</a>
+</div>
 
-    <div class="heading">
-        <h1>Dashboard</h1>
-        <h2> Welcome <%= user.username %>! </h2>
-        <a href="/pokemon">Register a Pokemon</a>
-        <a href="/orders">Previous Orders</a>
-    </div>
-    
+<style>
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
