@@ -25,7 +25,6 @@ const auth_register_post = async (req, res) => {
         errors.push({ msg: "User already exists, try logging in instead." })
         return res.send(errors)
       }
-      console.log("test")
       const userId = nanoid();
       const newUser = new User({
         name: name,
@@ -38,7 +37,6 @@ const auth_register_post = async (req, res) => {
           if (err) throw err;
           newUser.password = hash;
           newUser.save().then((user) => {
-            console.log(user)
             user = JSON.parse(JSON.stringify(user));
             user.success = true;
             res.send(user)

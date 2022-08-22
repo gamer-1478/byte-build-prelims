@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 const gymSchema = new mongoose.Schema({
     name: reqString,
     location: reqString,
-
+    type_gym: reqString
 })
 
 module.exports = mongoose.model("Gym", gymSchema)
