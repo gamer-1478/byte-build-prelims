@@ -1,13 +1,14 @@
+const { ensureAuthenticated } = require('../middlewares/authenticate')
+
 const express = require('express'),
-    router = express.Router()
+    router = express.Router(),
     User = require("../schemas/userSchema")
     Pokemon = require('../schemas/pokemonSchema'),
     {nanoid} = require('nanoid')
 
-router.get('/', async (req, res)=> {
+router.get('/', ensureAuthenticated, async (req, res)=> {
     const userId = req.user.userId
     const pokemons = await Pokemon.find({userId})
-    console.log(pokemons)
     res.render('pokemon', {pokemons:await NewtestArray(pokemons), user: req.user})
 })
 
