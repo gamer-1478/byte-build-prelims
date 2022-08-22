@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     await user.orders.forEach(async order => {
         let foundOrder = await Order.findOne({ orderId: order })
         orders.push(foundOrder)
-        console.log(orders)
     })
 
     function render() {

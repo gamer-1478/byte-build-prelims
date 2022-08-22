@@ -51,12 +51,10 @@ router.post('/', ensureAuthenticated, async (req, res) => {
     })
 
     newOrder.save().then(async (order) => {
-        console.log(order)
         await User.findOneAndUpdate(
             { userId: req.user.userId },
             { $push: { orders: orderId }, $set: { cart: [] } }
         ).then((user) => {
-            console.log(user)
             res.send({ success: true })
         })
     })
