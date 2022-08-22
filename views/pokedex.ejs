@@ -1,0 +1,11 @@
+<% if(pokemons.length > 0){%>
+    <h2>All Pokemons</h2>
+    <% pokemons.forEach((pokemon)=>{ %>
+    <h3><%=pokemon.name %> </h3>
+    <img src="<%-pokemon.image%>" alt="pokemon image">
+    <p><strong>Type:</strong> <%=pokemon.type %> </p>
+    <p><strong>HP:</strong> <%=pokemon.hp%></p>
+    <p><strong>Weight:</strong>  <%=pokemon.weight %> </p>
+    <p><strong>Attacks:</strong>  <%=pokemon.attacks %> </p>
+    <% }) %>
+<%} %> 
