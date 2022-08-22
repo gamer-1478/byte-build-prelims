@@ -7,8 +7,8 @@ const express = require('express'),
 
 router.use(require('express-flash')());
 
-router.post('/register', forwardAuthenticated, auth_register_post)
-router.get('/register', auth_register_get)
+router.post('/register', auth_register_post)
+router.get('/register', forwardAuthenticated, auth_register_get)
 
 router.get('/login', forwardAuthenticated, auth_login_get)
 router.post('/login', auth_login_post)

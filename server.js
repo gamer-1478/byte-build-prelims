@@ -72,7 +72,7 @@ app.use('/dashboard', dashboard)
 app.use('/pokedex', pokedex)
 
 app.get('/404', (req, res) => {
-    res.render('404')
+    res.render('404', { user: req.user })
 });
 
 app.listen(PORT, () => {
