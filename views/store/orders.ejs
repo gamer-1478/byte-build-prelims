@@ -1,5 +1,30 @@
-<div>
-    <% orders.map(order=>{%> 
-        <p> <%=order.card%>  </p>
-    <%}) %> 
+<div class="order-container">
+    <% orders.map(order=>{%>
+    <div class="indi-prders">
+        <p> Name: <%=order.name%> </p>
+        <h2>Adress</h2>
+        <p> Line 1: <%=order.line1%> </p>
+        <p> Line 2: <%=order.line2%> </p>
+        <p> Line 3: <%=order.line3%> </p>
+        <p> Date Of Order: <%=order.date%> </p>
+        <h2>Items</h2>
+        <div>
+            <% order.cart.map(product=>{%>
+            <p> Product: <%=product.name%> </p>
+            <p> Quantity: <%=product.quantity%> </p>
+            <%})%>
+        </div>
+        <p> Total: <%=order.total%> </p>
+    </div>
+    <%}) %>
 </div>
+
+<style>
+    .indi-prders {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+    }
+</style>
