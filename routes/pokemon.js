@@ -4,25 +4,30 @@ const express = require('express'),
     router = express.Router(),
     User = require("../schemas/userSchema"),
     Pokemon = require('../schemas/pokemonSchema'),
-    {nanoid} = require('nanoid');
+    { nanoid } = require('nanoid');
 
-router.get('/', ensureAuthenticated, async (req, res)=> {
+router.get('/', ensureAuthenticated, async (req, res) => {
     const userId = req.user.userId;
-    const pokemons = await Pokemon.find({userId});
-    const pokemonsArray = await NewtestArray(pokemons);
-    console.log(pokemonsArray);
-    res.render('pokemon.ejs', {pokemons: pokemonsArray, user: req.user})
+    const pokemons = await Pokemon.find({ userId });
+    if (pokemons.length === 0) {
+        console.log('No pokemons found');
+        res.render('pokemon.ejs', { pokemons: [], user: req.user })
+    } else {
+        const pokemonsArray = await NewtestArray(pokemons);
+        console.log(pokemonsArray);
+        res.render('pokemon.ejs', { pokemons: pokemonsArray, user: req.user })
+    }
 })
 
 router.post('/add', async (req, res) => {
     const userId = req.user.userId
-    const pokemons = await Pokemon.find({userId})
-    const {name, weight, hp, type, image, attacks} = req.body
+    const pokemons = await Pokemon.find({ userId })
+    const { name, weight, hp, type, image, attacks } = req.body
     const pokemonId = nanoid()
     const newPokemon = new Pokemon({
         userId,
         name,
-        weight, 
+        weight,
         hp,
         type,
         pokemonId,
