@@ -19,12 +19,17 @@
             <li class="nav-item">
                 <a href="/store" class="nav-link">Store</a>
             </li>
+            <% if (typeof user != "undefined"){ %>
+            <% } else { %>
+
             <li class="nav-item sign-button-mobile">
                 <a href="/auth/register" class="nav-link">Sign Up</a>
             </li>
             <li class="nav-item sign-button-mobile">
                 <a href="/auth/login" class="nav-link">LogIn</a>
             </li>
+            <% } %>
+
         </ul>
         <div class="right-side-nav">
             <div class="search-input-div">
@@ -41,7 +46,8 @@
                     src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
                     alt="profile"></a>
             <% } else { %>
-            <button class="sign-button" onclick="new function(){window.location.href = '/auth/register'};">Sign up</button>
+            <button class="sign-button" onclick="new function(){window.location.href = '/auth/register'};">Sign
+                up</button>
             <% } %>
         </div>
         <div class="hamburger">

@@ -8,7 +8,7 @@ const store = async (req, res) => {
     var products = await Product.find({})
     products = JSON.parse(JSON.stringify(products))
 
-    res.render("store/store", { user: req.user, products:await NewtestArray(products) })
+    res.render("store/store", { user: req.user, products: await NewtestArray(products) })
 }
 
 //each item view
@@ -23,11 +23,26 @@ const store_item_buy = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
     const user = await User.findOne({ _id: req.user._id })
     if (product.quantity > 0) {
-        user.cart.push({ prodid: product.productId, quan: req.body.qty });
-        await user.save()
-        product.quantity -= req.body.qty;
-        await product.save()
-        res.send({ success: true, msg: "Product added to cart" })
+        if (user.cart.length > 0) {
+            for (var i = 0; i < user.cart.length; i++) {
+                if (user.cart[i].prodid === product.productId) {
+                    user.cart[i].quan = parseInt(user.cart[i].quan)+parseInt(req.body.qty);
+                    console.log(req.body.qty, user.cart[i].quan)
+                    user.save()
+                    return res.send({ success: true, msg: "Product added to cart" })
+                }
+                if (i === user.cart.length - 1 && user.cart[i].productId !== product.productId) {
+                    console.log("here")
+                    user.cart.push({ prodid: product.productId, quan: req.body.qty });
+                    await user.save()
+                    return res.send({ success: true, msg: "Product added to cart" })
+                }
+            }
+        } else {
+            user.cart.push({ prodid: product.productId, quan: req.body.qty });
+            await user.save()
+            res.send({ success: true, msg: "Product added to cart" })
+        }
     }
     else {
         res.send({ msg: "Product out of stock" })
@@ -50,7 +65,7 @@ const store_admin_create = (req, res) => {
     Product.findOne({ name: name }).then(product => {
         if (product) {
             errors.push({ msg: "Product already exists" })
-            
+
         }
     })
     if (errors.length > 0) {
@@ -68,7 +83,7 @@ const store_admin_create = (req, res) => {
         image
     })
     newProduct.save().then(() => {
-        res.send({ sucess: true,  msg: "Product created, Redirecting in 1 min!", productId })
+        res.send({ sucess: true, msg: "Product created, Redirecting in 1 min!", productId })
     })
 }
 
