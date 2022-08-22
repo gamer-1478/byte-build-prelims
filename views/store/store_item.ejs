@@ -1,14 +1,147 @@
-<div>
-    <h1> <%= product.name %>  </h1>
-    <h3> <%= product.price %> Creds </h3>
-    <h3> <%= product.quantity %>  </h3>
-    <h3> <%= product.type %>  </h3>
-    <p> <%= product.description %>  </p>
+<div class="store-main">
+    <div class="left-side">
+        <h1 class="main-name"> <%= product.name %> </h1>
+        <img class="product-image" src="<%= product.image %>">
+    </div>
+    <div class="right-side">
+        <h3 class="description"> <%= product.description %> </h3>
 
-    <form action="/store/buy/<%=product.productId%>" method="post">
-        <label for="qty">Quantity</label>
-        <input type="number" minimum="1" maximum="<%=product.quantity%>" name="qty" id="qty">
-        <button type="submit">Buy Now</button>
-    </form>
-
+        <p class="category"> <span class="bold">Category:</span> <%= product.type %> </p>
+        <p class="stock"> <span class="bold">Stock Left:</span> <%= product.quantity %> </p>
+        <br><br>
+        <h2 class="price"> ₹ <%= product.price %> </h2>
+        <div class="buy-form" method="post">
+            <input type="number" placeholder="Qty." id="qty" name="qty" min="1" max="<%= product.quantity %>" value="1">
+            <button class="buy-button" onclick="submit()">Buy</button>
+        </div>
+    </div>
 </div>
+
+
+<style>
+    .price {
+        font-size: 2em;
+    }
+
+    .buy-button {
+        width: 100px;
+        height: 50px;
+        background: #111;
+        color: #eee;
+        cursor: pointer;
+        font-size: 19px;
+        border: none;
+        border-radius: 7px;
+    }
+
+    input {
+        width: 150px;
+        height: 50px;
+        padding-left: 10px;
+        font-size: 15px;
+        padding-right: 5px;
+        border-radius: 9px;
+        border: 1px solid #111;
+    }
+
+    .category {
+        margin-top: 30px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .description {
+        font-weight: 500;
+        width: 80%;
+    }
+
+    .right-side {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 50%;
+    }
+
+    .left-side {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+    }
+
+    .store-main {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-name {
+        font-size: 42px;
+    }
+
+    .product-image {
+        width: 70%;
+    }
+
+    @media screen and (max-width: 770px) {
+        .buy-form {
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            justify-content: space-between;
+            margin-bottom: 50px;
+
+        }
+
+        .store-main {
+            flex-direction: column;
+        }
+
+        .left-side,
+        .right-side {
+            width: 100%;
+        }
+
+        .right-side {
+            align-items: center;
+        }
+
+        .category,
+        .stock {
+            font-size: 20px;
+            width: 80%;
+        }
+
+        .price {
+            width: 70%;
+        }
+
+    }
+</style>
+
+<script>
+    var notyf = new Notyf();
+    async function submit() {
+        var qty = document.getElementById("qty").value;
+        await fetch("/store/buy/<%=product.productId%>", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                qty: qty
+            })
+        }).then(async (response) => {
+            res = await response.json()
+            console.log(res.success == true, res)
+            if (res.success == true) {
+                await notyf.success(res.msg);
+            } else {
+                await notyf.error(res.msg)
+            }
+        });
+    }
+</script>

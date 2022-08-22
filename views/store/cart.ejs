@@ -1,0 +1,62 @@
+<div class="main-cart">
+    <h1 class="main-title">Cart</h1>
+    <div class="main-cart-container">
+        <% if (cart.length > 0) { %>
+        <% for (let i = 0; i < cart.length; i++) { %>
+        <div class="cart-item">
+            <div class="cart-item-image">
+                <img width="175px" src="<%= cart[i].image %>" alt="<%= cart[i].name %>">
+            </div>
+            <div class="cart-item-details">
+                <div class="cart-item-name"><%= cart[i].name %></div>
+                <div class="cart-item-quantity">
+                    <span class="cart-item-label">Quantity:</span>
+                    <span class="cart-item-value"><%= cart[i].quantity %></span>
+                </div>
+                <div class="cart-item-price">
+                    <span class="cart-item-label">Price:</span>
+                    <span class="cart-item-value">₹<%= cart[i].price %></span>
+                </div>
+                <div class="cart-item-price">
+                    <span class="cart-item-label">Total:</span>
+                    <span class="cart-item-value">₹<%= cart[i].quantity*cart[i].price %></span>
+                </div>
+
+            </div>
+        </div>
+        <% } %>
+        <% } else { %>
+        <div class="cart-empty">Your cart is empty.</div>
+        <% } %>
+    </div>
+</div>
+
+<style>
+    .main-cart-container {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 100%;
+        align-self: flex-start;
+    }
+    .main-cart {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        background-color: #eee;
+    }
+
+    .main-title {
+        font-size: 3em;
+        margin: 20px;
+    }
+</style>

@@ -3,6 +3,7 @@ const User = require("../schemas/userSchema")
 const { nanoid } = require("nanoid")
 
 
+//main page
 const store = async (req, res) => {
     var products = await Product.find({})
     products = JSON.parse(JSON.stringify(products))
@@ -10,31 +11,38 @@ const store = async (req, res) => {
     res.render("store/store", { user: req.user, products:await NewtestArray(products) })
 }
 
-
-
+//each item view
 const store_item_view = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
     console.log(product.name)
     res.render("store/store_item", { user: req.user, product })
 }
 
+// cart mechanism [BROKEN TO FIX!]
 const store_item_buy = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
-    const user = await User.findOne({ userId: req.user.userId })
-    const { qty } = req.body
-    if (qty * product.price > user.creds) {
-        res.send("Can't afford")
+    const user = await User.findOne({ _id: req.user._id })
+    if (product.quantity > 0) {
+        user.cart.push({ prodid: product.productId, quan: req.body.qty });
+        await user.save()
+        product.quantity -= req.body.qty;
+        await product.save()
+        res.send({ success: true, msg: "Product added to cart" })
+    }
+    else {
+        res.send({ msg: "Product out of stock" })
     }
 }
 
+// admin page
 const store_admin = async (req, res) => {
     const products = await Product.find({})
     res.render('store/store_admin', { user: req.user, products: await NewtestArray(products) })
 }
 
+// admin make product
 const store_admin_create = (req, res) => {
     const { name, quantity, type, description, price, image } = req.body
-    console.log(req.body)
     var errors = [];
     if (!name || !quantity || !type || !description || !price || !image) {
         errors.push({ msg: "Please fill in all fields" })
@@ -64,26 +72,42 @@ const store_admin_create = (req, res) => {
     })
 }
 
+// edit product page
 const store_admin_get_product = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
     res.render("store/store_admin_product", { user: req.user, product })
 }
 
+// edit product post
 const store_admin_post_product = async (req, res) => {
-    console.log(req.body);
-    const { name, quantity, type, description, price } = req.body
+    const { name, quantity, type, description, price, image } = req.body
+    var errors = [];
+    if (!name || !quantity || !type || !description || !price || !image) {
+        errors.push({ msg: "Please fill in all fields" })
+    }
+    Product.findOne({ productId: req.params.id }).then(product => {
+        if (!product) {
+            errors.push({ msg: "Product Doesn't exist" })
+        }
+    })
+    if (errors.length > 0) {
+        console.log(errors)
+        return res.send(errors)
+    }
     const product = await Product.findOneAndUpdate({ productId: req.params.id }, {
         name,
         quantity,
         type,
         description,
-        price
+        price,
+        image
     })
     product.save().then(async () => {
         res.redirect('/store/admin')
     })
 }
 
+// delete product post
 const store_admin_delete_product = async (req, res) => {
     const products = await Product.findOne({})
     await Product.deleteOne({ productId: req.params.id }).then(() => {
@@ -91,7 +115,7 @@ const store_admin_delete_product = async (req, res) => {
     })
 }
 
-
+// helper function to make array of products
 async function NewtestArray(products) {
     var testArray = []
     var prodLen = products.length
