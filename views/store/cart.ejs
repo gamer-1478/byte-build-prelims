@@ -50,7 +50,7 @@
                 <% } else { %>
                 <div class="subtotal-value">₹0</div>
                 <% } %>
-                <button class="buy-button checkout">Checkout</button>
+                <button class="buy-button checkout" onclick="ReadyCheckout()">Checkout</button>
             </div>
         </div>
     </div>
@@ -265,3 +265,9 @@
         }
     }
 </style>
+
+<script>
+    function ReadyCheckout() {
+        window.location.href = "/checkout";
+    }
+</script>

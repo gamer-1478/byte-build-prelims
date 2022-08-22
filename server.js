@@ -17,11 +17,13 @@ const express = require('express'),
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
     admin = require('./routes/admin.js'),
-    map = require('./routes/map.js'), cart = require('./routes/cart.js'),
-    store = require('./routes/store.js');
-    gym = require('./routes/gyms.js');
-    checkout = require('./routes/checkout.js');
-    orders = require('./routes/orders.js');
+    map = require('./routes/map.js'),
+    cart = require('./routes/cart.js'),
+    store = require('./routes/store.js'),
+    gym = require('./routes/gyms.js'),
+    checkout = require('./routes/checkout.js'),
+    orders = require('./routes/orders.js'),
+    dashboard = require('./routes/dashboard.js'),
     pokemon = require('./routes/pokemon.js');
 
 const app = express(),
@@ -54,15 +56,16 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //main
-app.use('/', landing)
-app.use('/auth', auth)
-app.use('/admin', admin)
-app.use('/map', map)
-app.use('/store', store)
-app.use('/gym', gym)
-app.use('/cart', cart)
-app.use('/checkout', checkout)
+app.use('/', landing) //done
+app.use('/auth', auth) //domne
+app.use('/admin', admin) //add pages
+app.use('/map', map) //done
+app.use('/store', store) //done
+app.use('/gym', gym) //add individual pages
+app.use('/cart', cart) //done
+app.use('/checkout', checkout) //done
 app.use('/orders', orders)
+app.use('/dashboard', dashboard)
 app.use('/pokemon', pokemon)
 
 app.get('/404', (req, res) => {

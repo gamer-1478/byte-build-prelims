@@ -1,3 +1,182 @@
-<form action="/checkout" method="post">
-    <button type="submit">Checkout</button>
-</form>
+<div class="checkout-container">
+    <div class="subtotal">
+        <h1 class="subtotal-title">Subtotal</h1>
+        <h3> ₹<%=total%></h3>
+        <div class="subtotal-cart">
+            <% if (cart.length > 0) { %>
+            <% for (let i = 0; i < cart.length; i++) { %>
+            <div class="subtotal-value"><span class="bold"><%= cart[i].name %>:</span>
+                ₹<%= cart[i].quantity*cart[i].price %>
+            </div>
+            <% } %>
+            <% } else { %>
+            <div class="subtotal-value">₹0</div>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="signup-form">
+        <h2>Name</h2>
+        <div class="field">
+            <input type="text" id="name" name="name" placeholder="Ashok Kumar">
+        </div>
+        <h2>Address</h2>
+        <div class="field">
+            <label for="email">Line 1</label>
+            <input type="text" id="line1" name="line1" placeholder="h.no 111,">
+        </div>
+        <div class="field">
+            <label for="email">Line 2</label>
+            <input type="text" id="line2" name="line2" placeholder="Sector 1,">
+        </div>
+        <div class="field">
+            <label for="email">Line 3</label>
+            <input type="text" id="line3" name="line3" placeholder="Near xyz farm">
+        </div>
+        <h2>Credit/Debit Card</h2>
+        <div class="field">
+            <input type="text" id="card" name="card" placeholder="0123123423453456">
+        </div>
+
+        <input type="button" value="proceed" onclick="submit();" class="signup-button" />
+    </div>
+
+</div>
+
+<style>
+    .checkout-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .click-here {
+        color: #393E47;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: 130px;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
+
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
+</style>
+
+
+<style>
+    .subtotal-cart {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 80%;
+    }
+
+    .subtotal-title {
+        margin-top: 20px;
+    }
+
+    .subtotal {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        min-height: 25vh;
+        background-color: #eee;
+        border-radius: 10px;
+        padding: 10px;
+        padding-left: 30px;
+        margin-top: 100px;
+    }
+
+    @media screen and (max-width: 770px) {
+        .subtotal {
+            width: 80%;
+            min-height: 25vh;
+            background-color: #eee;
+            border-radius: 10px;
+            padding: 10px;
+            padding-left: 30px;
+            margin-top: 150px;
+        }
+    }
+</style>
+<script>
+    var notyf = new Notyf()
+    async function submit() {
+        let name = document.getElementById("name").value;
+        let line1 = document.getElementById("line1").value;
+        let line2 = document.getElementById("line2").value;
+        let line3 = document.getElementById("line3").value;
+        let card = document.getElementById("card").value;
+        let data = {
+            name: name,
+            line1: line1,
+            line2: line2,
+            line3: line3,
+            card: card
+        };
+        let response = await fetch("/checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        let result = await response.json();
+        console.log(result);
+        if (result.success == true) {
+            window.location.href = "/dashboard";
+        } else {
+            notyf.error(result.message);
+        }
+    }
+</script>

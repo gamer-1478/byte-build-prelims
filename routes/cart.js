@@ -43,4 +43,5 @@ router.post('/quantity/:id', ensureAuthenticated, (req, res)=> {
     req.user.save();
     res.send({ success: true });
 })
+
 module.exports = router;
